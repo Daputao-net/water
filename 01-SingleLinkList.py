@@ -30,8 +30,9 @@ class SingleLinkList(object):
         """遍历整个链表"""
         cur = self.__head
         while cur != None:
-            print(cur.elem)
+            print(cur.elem, end=" ")
             cur = cur.next
+        print("")
 
     def add(self, item):
         """链表头部添加元素"""
@@ -61,32 +62,46 @@ class SingleLinkList(object):
             self.append(item)
         else:
             node = Node(item)
-            per = self.__head
+            pre = self.__head
             count = 0
             while count < (pos-1):
                 count += 1
-                per = per.next
-            node.next = per.next
-            per.next = node
+                pre = pre.next
+            node.next = pre.next
+            pre.next = node
 
     def remove(self, item):
         """删除节点"""
-        per = self.__head
-        if per == None:
+        pre = self.__head
+        if pre == None:
             return False
-        elif per.elem == item:
-            self.__head = per.next
-            per = None
+        elif pre.elem == item:
+            self.__head = pre.next
+            pre = None
             return True
         else:
-            while per.next != None:
-                if per.next.elem == item:
-                    per.next = per.next.next
+            while pre.next != None:
+                if pre.next.elem == item:
+                    pre.next = pre.next.next
                     return True
                 else:
-                    per = per.next
+                    pre = pre.next
             return False
-
+        # 也可以使用这种方法
+        # cur = self.__head
+        # pre = None
+        # while cur != None:
+        #     if cur.elem == item:
+        #         # 先判断此结点是否是头节点
+        #         # 头节点
+        #         if cur == self.__head:
+        #             self.__head = cur.next
+        #         else:
+        #             pre.next = cur.next
+        #         break
+        #     else:
+        #         pre = cur
+        #         cur = cur.next
 
     def search(self, item):
         """查找节点是否存在"""
@@ -98,5 +113,4 @@ class SingleLinkList(object):
             else:
                 cur = cur.next
         return False
-
 
